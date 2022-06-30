@@ -1,7 +1,11 @@
 import React from "react";
+import "../css/table.css";
 import TableRow from "./TableRow";
+import Loader from "./Loader";
+import WidgetMessage from "./WidgetMessage";
+import Properties from "./../utils/Properties";
 
-function Table(props) {
+export default function Table(props) {
   const {
     loading,
     tableData,
@@ -13,15 +17,13 @@ function Table(props) {
   } = props;
 
   function toggleSelectAll(checked) {
-    if (checked) {
-      setSelectedRows(
-        paginatedData.map((rec) => {
-          return rec.id;
-        })
-      );
-    } else {
-      setSelectedRows([]);
-    }
+    checked
+      ? setSelectedRows(
+          paginatedData.map((rec) => {
+            return rec.id;
+          })
+        )
+      : setSelectedRows([]);
   }
 
   function getCheckbox() {
@@ -29,6 +31,7 @@ function Table(props) {
     const currentRows = paginatedData.map((rec) => {
       return rec.id;
     });
+
     if (currentRows.length === 0) isChecked = false;
     else {
       currentRows.forEach((rec) => {
@@ -41,9 +44,8 @@ function Table(props) {
         <input
           type="checkbox"
           id="selectAll"
-          name="vehicle1"
-          value="selectAll"
-          style={{ cursor: "pointer" }}
+          name="selectAll"
+          className="defaultCheckbox cursor-pointer m-r-20"
           checked={isChecked}
           onChange={(e) => toggleSelectAll(e.target.checked)}
         />
@@ -57,7 +59,7 @@ function Table(props) {
       <table>
         <thead>
           <tr>
-            <th style={{ textAlign: "center" }}>{getCheckbox()}</th>
+            <th className="center">{getCheckbox()}</th>
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
@@ -82,8 +84,8 @@ function Table(props) {
           ) : (
             <tr>
               {
-                <td colSpan="5" style={{ textAlign: "center" }}>
-                  No records found
+                <td colSpan="5" className="center">
+                  {Properties.no_record_found}
                 </td>
               }
             </tr>
@@ -97,9 +99,9 @@ function Table(props) {
     const { error } = tableData;
 
     if (loading) {
-      //   return <LoadingIndicator />;
+      return <Loader />;
     } else if (error) {
-      //   return <WidgetNoData message={error} />;
+      return <WidgetMessage message={error} />;
     } else {
       return <div className={"table-wrapper"}>{getTable()}</div>;
     }
@@ -107,5 +109,3 @@ function Table(props) {
 
   return <>{getTableHolder()}</>;
 }
-
-export default Table;

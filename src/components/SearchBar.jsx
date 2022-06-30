@@ -1,16 +1,7 @@
 import React, { useEffect } from "react";
+import Properties from "../utils/Properties";
 
-const classes = {
-  searchBar: {
-    width: "98%",
-    padding: 10,
-    marginTop: 20,
-    marginBottom: 20,
-    borderRadius: 20,
-  },
-};
-
-function SearchBar(props) {
+export default function SearchBar(props) {
   const { data, setFilteredData } = props;
 
   useEffect(() => {
@@ -38,11 +29,9 @@ function SearchBar(props) {
     <input
       type="text"
       className="search-input"
-      style={classes.searchBar}
-      placeholder="Search by name, email or role"
+      placeholder={Properties.search_placeholder}
       onChange={(e) => filterData(e.target.value)}
+      disabled={data.length === 0}
     />
   );
 }
-
-export default SearchBar;

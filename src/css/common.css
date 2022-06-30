@@ -1,0 +1,38 @@
+.center-container {
+  display: flex;
+  align-items: center;
+  height: 400px;
+}
+
+.center {
+  text-align: center;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.edit-icon {
+  font-size: 20;
+  color: "#8a82f7";
+  padding-right: 20;
+}
+
+/* scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(168, 168, 168);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(121, 121, 121);
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}

@@ -1,0 +1,33 @@
+.page-button-container {
+  padding: 10px;
+}
+
+.page-button {
+  background-color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid #8a82f7;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.page-button.selected {
+  color: #fff;
+  background-color: #8a82f7;
+}
+
+.delete-button {
+  background-color: #de425b;
+  color: #fff;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #de425b;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.delete-button:disabled {
+  opacity: 70%;
+}

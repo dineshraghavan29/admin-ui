@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 
 const classes = {
-  editIcon: {
+  icon: {
     fontSize: 20,
-    color: "#8a82f7",
-    paddingRight: 20,
     cursor: "pointer",
   },
+  editSaveIcon: {
+    color: "#8a82f7",
+    paddingRight: 20,
+  },
   deleteIcon: {
-    fontSize: 20,
     color: "#de425b",
-    cursor: "pointer",
   },
 };
 
-function TableRow(props) {
+export default function TableRow(props) {
   const {
     rec,
     tableData,
@@ -46,7 +46,7 @@ function TableRow(props) {
           name={rec.id}
           value={rec.id}
           checked={isSelected}
-          style={{ cursor: "pointer" }}
+          className="defaultCheckbox cursor-pointer"
           onChange={() => toggleSelect()}
         />
         <label htmlFor={rec.id} />
@@ -100,23 +100,25 @@ function TableRow(props) {
   function getEditRow() {
     return (
       <tr className={isSelected ? "selected" : ""}>
-        <td style={{ textAlign: "center" }}>{getCheckbox()}</td>
+        <td className="center">{getCheckbox()}</td>
         <td>{getInput("name")}</td>
         <td>{getInput("email")}</td>
         <td>{getSelectInput("role")}</td>
         <td>
           <i
             className="fa-solid fa-floppy-disk"
-            style={classes.editIcon}
+            style={{ ...classes.icon, ...classes.editSaveIcon }}
             onClick={() => {
               updateTableData();
               setEditMode(false);
             }}
+            title="Save"
           ></i>
           <i
             className="fa-solid fa-trash-can"
-            style={classes.deleteIcon}
+            style={{ ...classes.icon, ...classes.deleteIcon }}
             onClick={() => deleteHandler(rec.id)}
+            title="Delete"
           ></i>
         </td>
       </tr>
@@ -126,20 +128,22 @@ function TableRow(props) {
   function getRow() {
     return (
       <tr className={isSelected ? "selected" : ""}>
-        <td style={{ textAlign: "center" }}>{getCheckbox()}</td>
+        <td className="center">{getCheckbox()}</td>
         <td>{rec.name}</td>
         <td>{rec.email}</td>
         <td>{rec.role}</td>
         <td>
           <i
             className="fa-solid fa-pen-to-square"
-            style={classes.editIcon}
+            style={{ ...classes.icon, ...classes.editSaveIcon }}
             onClick={() => setEditMode(true)}
+            title="Edit"
           ></i>
           <i
             className="fa-solid fa-trash-can"
-            style={classes.deleteIcon}
+            style={{ ...classes.icon, ...classes.deleteIcon }}
             onClick={() => deleteHandler(rec.id)}
+            title="Delete"
           ></i>
         </td>
       </tr>
@@ -148,5 +152,3 @@ function TableRow(props) {
 
   return <>{editMode ? getEditRow() : getRow()}</>;
 }
-
-export default TableRow;

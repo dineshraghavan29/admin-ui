@@ -21,16 +21,17 @@ function Pagination(props) {
     setPaginatedData(data.slice(startIndex, startIndex + 10));
   }
 
-  function getPageButtons() {
+  function getPageButton() {
     const isFirst = currentPage === 0;
     const isLast = currentPage === (pages.length ? pages.length - 1 : 0);
 
-    function getStaticButton(label, disableCondition, handler) {
+    function getStaticButton(label, title, disableCondition, handler) {
       return (
         <button
           className="page-button"
           disabled={disableCondition}
           onClick={handler}
+          title={title}
         >
           {label}
         </button>
@@ -55,16 +56,22 @@ function Pagination(props) {
 
     return (
       <>
-        {getStaticButton("<<", isFirst, () => setCurrentPage(0))}
-        {getStaticButton("<", isFirst, () => setCurrentPage(currentPage - 1))}
+        {getStaticButton("<<", "First", isFirst, () => setCurrentPage(0))}
+        {getStaticButton("<", "Previous", isFirst, () =>
+          setCurrentPage(currentPage - 1)
+        )}
         {getDynamicButton()}
-        {getStaticButton(">", isLast, () => setCurrentPage(currentPage + 1))}
-        {getStaticButton(">>", isLast, () => setCurrentPage(pages.length - 1))}
+        {getStaticButton(">", "Next", isLast, () =>
+          setCurrentPage(currentPage + 1)
+        )}
+        {getStaticButton(">>", "Last", isLast, () =>
+          setCurrentPage(pages.length - 1)
+        )}
       </>
     );
   }
 
-  return <div className="page-button-container">{getPageButtons()}</div>;
+  return <div className="page-button-container">{getPageButton()}</div>;
 }
 
 export default Pagination;

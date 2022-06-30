@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import "../css/adminPanel.css";
 import SearchBar from "../components/SearchBar";
 import Table from "../components/Table";
 import Pagination from "../components/Pagination";
-import { getMembers } from "../services/adminService";
+import { getUsers } from "../services/adminService";
+import Properties from "../utils/Properties";
 
 const makeStyles = () => {
   return {
@@ -15,24 +17,15 @@ const makeStyles = () => {
       borderRadius: 10,
       boxShadow: "0px 0px 20px #8a82f7",
     },
-    center: {
-      textAlign: "center",
-    },
     headerContainer: {
       display: "flex",
       alignItems: "center",
       width: "100%",
     },
-    deleteWrapper: {
-      width: "20%",
-    },
-    searchWrapper: {
-      width: "80%",
-    },
   };
 };
 
-function AdminPanel() {
+export default function AdminPanel() {
   const [loading, setLoading] = useState(false);
   const [tableData, setTableData] = useState({ error: "", data: [] });
   const [filteredData, setFilteredData] = useState([]);
@@ -46,13 +39,21 @@ function AdminPanel() {
   }, []);
 
   function getTableData() {
-    getMembers()
-      .then((response) => {
-        setTableData({ error: "", data: JSON.parse(response) });
-      })
-      .catch((message) => {
-        setTableData({ error: message, data: [] });
-      });
+    setLoading(true);
+
+    //Simulated loading
+    setTimeout(() => {
+      getUsers()
+        .then((response) => {
+          setLoading(false);
+          setTableData({ error: "", data: JSON.parse(response) });
+        })
+        .catch((message) => {
+          setLoading(false);
+          setTableData({ error: message, data: [] });
+        })
+        .finally(() => setLoading(false));
+    }, 2000);
   }
 
   function deleteData(id) {
@@ -79,17 +80,17 @@ function AdminPanel() {
         disabled={selectedRows.length === 0}
         onClick={() => deleteData()}
       >
-        Delete Selected
+        {Properties.delete_selected}
       </button>
     );
   }
 
   return (
-    <div style={classes.center}>
+    <div className="center">
       <div style={classes.container}>
         <div style={classes.headerContainer}>
-          <div style={classes.deleteWrapper}>{getDeleteButton()}</div>
-          <div style={classes.searchWrapper}>
+          <div className="delete-wrapper">{getDeleteButton()}</div>
+          <div className="search-wrapper">
             <SearchBar
               data={tableData.data}
               setFilteredData={setFilteredData}
@@ -111,5 +112,3 @@ function AdminPanel() {
     </div>
   );
 }
-
-export default AdminPanel;

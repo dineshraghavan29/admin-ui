@@ -1,0 +1,39 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+  text-align: left;
+}
+
+table tr.selected {
+  background-color: #e2e2e2;
+}
+
+table td {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 20px 15px 0px;
+}
+
+table th {
+  border-bottom: 1px solid #ddd;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: #ffffff;
+  background-color: #8a82f7;
+}
+
+.table-wrapper {
+  overflow-y: auto;
+  height: 400px;
+  width: 100%;
+  margin-bottom: 10;
+}
+
+.table-wrapper thead th {
+  position: sticky;
+  top: 0;
+}
+
+.p-l-0 {
+  padding-left: 0px;
+}

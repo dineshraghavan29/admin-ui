@@ -1,0 +1,39 @@
+.search-input {
+  width: 98%;
+  padding: 10px;
+  margin: 20px 0px 20px 0px;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  border-radius: 20px;
+}
+
+.search-input:focus {
+  border: 3px solid #8a82f7;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 5px 5px;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  border-radius: 20px;
+}
+
+.edit-input:focus {
+  border: 3px solid #8a82f7;
+}
+
+input.defaultCheckbox {
+  width: 15px;
+  height: 15px;
+}
+
+.m-r-20 {
+  margin-right: 20px;
+}
